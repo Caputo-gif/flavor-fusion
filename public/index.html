@@ -217,6 +217,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div><div class="pc-name">Chef Profissional</div><div class="pc-desc">Área de gastronomia. Alta cozinha, terminologia técnica e emplatamento.</div>
       <div class="pc-tags"><span class="pc-tag" style="background:#FBEAF0;color:#993556">Alta gastronomia</span><span class="pc-tag" style="background:#FBEAF0;color:#993556">Emplatamento</span></div></div></div>
     </div>
+    <div style="background:#f8f8f8;border-radius:12px;padding:1rem;margin-top:.75rem;border:1px solid #eee">
+      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave da API Anthropic</div>
+      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Necessária para identificar alimentos com IA. Obtenha gratuitamente em <strong>console.anthropic.com</strong></div>
+      <input id="api-key-input" type="password" placeholder="sk-ant-..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
+      <div style="font-size:10px;color:#aaa">A chave fica salva apenas no seu navegador, nunca é enviada a terceiros.</div>
+    </div>
     <button class="btn-start" onclick="startApp()">Entrar na Cozinha →</button>
   </div>
 </div>
@@ -424,6 +430,18 @@ function selectProfile(i){
 }
 
 function startApp(){
+  var keyInput=document.getElementById("api-key-input");
+  var key=keyInput?keyInput.value.trim():"";
+  if(key) {
+    window.ANTHROPIC_KEY=key;
+    localStorage.setItem("cn_apikey",key);
+  } else {
+    window.ANTHROPIC_KEY=localStorage.getItem("cn_apikey")||"";
+  }
+  if(!window.ANTHROPIC_KEY){
+    alert("Por favor insira sua chave da API Anthropic (sk-ant-...) para continuar.");
+    return;
+  }
   const p=PROFILES[selProfile];
   document.getElementById("screen-profile").classList.add("hidden");
   document.getElementById("screen-main").classList.remove("hidden");
@@ -557,26 +575,49 @@ function analyzeImg(dataUrl){
   document.getElementById("ai-box").classList.remove("hidden");
   setStatus("Analisando e buscando preços regionais...","loading");
   var p=PROFILES[selProfile];
-  var sys='Voce e especialista em culinaria adaptado para: '+p.prompt+'. Responda APENAS com JSON valido com os campos: nome, emoji, categoria, confianca (Alta|Media|Baixa), tags (array 3 itens), desc (2-3 frases), grid (array de pares chave-valor), preco (objeto com valor, referencia, dica, melhorEpoca), nutri (array de pares nutriente-percentual), curiosidades (array 3 itens), tecnicas (array 3 itens), receitas (array 3 objetos com n, tipo, tempo), receita_detalhada (objeto com n, tempo, rend, ing, steps, tip, emplatamento).';
+  var locationCtx=userLoc.city
+    ?"Usuario em: "+userLoc.city+". Inclua preco com valores medios locais em reais."
+    :"Localizacao indisponivel. Use precos medios do Brasil no campo preco.";
+  var sys="Voce e especialista em culinaria adaptado para: "+p.prompt+". "+locationCtx+" Responda APENAS com JSON valido com os campos: nome, emoji, categoria, confianca (Alta|Media|Baixa), tags (array 3 itens), desc (2-3 frases), grid (array de pares chave-valor), preco (objeto com valor, referencia, dica, melhorEpoca), nutri (array de pares nutriente-percentual 0-100), curiosidades (array 3 itens), tecnicas (array 3 itens formato 'nome: descricao'), receitas (array 3 objetos com n, tipo, tempo), receita_detalhada (objeto com n, tempo, rend, ing array, steps array, tip, emplatamento).";
   var b64=dataUrl.split(",")[1];
   var mt=dataUrl.startsWith("data:image/png")?"image/png":"image/jpeg";
-  fetch("/api/analyze",{
+  fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({image:b64,mediaType:mt,systemPrompt:sys,latitude:userLoc.lat,longitude:userLoc.lon,city:userLoc.city})
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key": window.ANTHROPIC_KEY||"",
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1500,
+      system:sys,
+      messages:[{
+        role:"user",
+        content:[
+          {type:"image",source:{type:"base64",media_type:mt,data:b64}},
+          {type:"text",text:"Identifique este alimento e responda APENAS com o JSON solicitado."}
+        ]
+      }]
+    })
   })
   .then(function(res){return res.json();})
   .then(function(data){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
-    if(data.error) throw new Error(data.error);
-    displayResult(data,true);
-    setStatus("✅ "+data.nome+" identificado! Confiança: "+data.confianca);
+    if(data.error) throw new Error(data.error.message||data.error);
+    var text=(data.content||[]).map(function(c){return c.text||"";}).join("").trim();
+    text=text.replace("```json","").replace("```","").trim();
+    var parsed=JSON.parse(text);
+    displayResult(parsed,true);
+    setStatus("✅ "+parsed.nome+" identificado! Confiança: "+parsed.confianca);
   })
   .catch(function(e){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
-    setStatus("Erro ao analisar. Tente novamente.","err");
+    console.error("Erro:",e);
+    setStatus("Erro ao analisar. Verifique a chave de API nas configurações.","err");
   });
 }
 
