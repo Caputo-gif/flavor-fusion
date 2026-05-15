@@ -524,7 +524,7 @@ function displayResult(food,fromAI){
   }).join("");
   document.getElementById("r-curio").innerHTML=(food.curiosidades||food.curio||[]).map((c,i)=>'<div class="curio-row"><div class="curio-n">'+(i+1)+'</div><div class="curio-t">'+c+"</div></div>").join("");
   const tecs=food.tecnicas||[];
-  document.getElementById("r-tech").innerHTML=tecs.map(t=>{const[n,...r]=t.split(":");return'<div class="tech-card"><div class="tech-name">'+n+'</div><div class="tech-desc">'+r.join(":")||""+"</div></div>";}).join("");
+  document.getElementById("r-tech").innerHTML=tecs.map(t=>{const idx=t.indexOf(":");const n=idx>=0?t.slice(0,idx):t;const d=idx>=0?t.slice(idx+1):"";return'<div class="tech-card"><div class="tech-name">'+n+'</div><div class="tech-desc">'+d+'</div></div>';}).join("");
   document.getElementById("tech-tab").style.display=selProfile>=1&&tecs.length?"":"none";
   document.getElementById("result-area").style.display="block";
   document.getElementById("rd-area").style.display="none";
