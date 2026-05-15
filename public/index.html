@@ -217,12 +217,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div><div class="pc-name">Chef Profissional</div><div class="pc-desc">Área de gastronomia. Alta cozinha, terminologia técnica e emplatamento.</div>
       <div class="pc-tags"><span class="pc-tag" style="background:#FBEAF0;color:#993556">Alta gastronomia</span><span class="pc-tag" style="background:#FBEAF0;color:#993556">Emplatamento</span></div></div></div>
     </div>
-    <div style="background:#f8f8f8;border-radius:12px;padding:1rem;margin-top:.75rem;border:1px solid #eee">
-      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave do OpenRouter</div>
-      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Gratuita! Obtenha em <strong>openrouter.ai</strong> → Keys → Create Key. Sem cartão de crédito.</div>
-      <input id="api-key-input" type="password" placeholder="sk-or-..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
-      <div style="font-size:10px;color:#aaa">A chave fica salva apenas no seu navegador, nunca é enviada a terceiros.</div>
-    </div>
     <button class="btn-start" onclick="startApp()">Entrar na Cozinha →</button>
   </div>
 </div>
@@ -430,18 +424,7 @@ function selectProfile(i){
 }
 
 function startApp(){
-  var keyInput=document.getElementById("api-key-input");
-  var key=keyInput?keyInput.value.trim():"";
-  if(key) {
-    window.GEMINI_KEY=key;
-    localStorage.setItem("cn_orkey",key);
-  } else {
-    window.GEMINI_KEY=localStorage.getItem("cn_orkey")||"";
-  }
-  if(!window.GEMINI_KEY){
-    alert("Por favor insira sua chave da API Anthropic (sk-ant-...) para continuar.");
-    return;
-  }
+  window.GEMINI_KEY="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";
   const p=PROFILES[selProfile];
   document.getElementById("screen-profile").classList.add("hidden");
   document.getElementById("screen-main").classList.remove("hidden");
