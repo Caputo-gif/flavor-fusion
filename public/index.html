@@ -578,7 +578,7 @@ function analyzeImg(dataUrl){
   var locationCtx=userLoc.city
     ?"Usuario em: "+userLoc.city+". Inclua preco com valores medios locais em reais para esta regiao."
     :"Localizacao indisponivel. Use precos medios do Brasil no campo preco.";
-  var prompt="Voce e especialista em culinaria adaptado para: "+p.prompt+". "+locationCtx+" Analise a imagem e responda APENAS com JSON valido (sem markdown, sem texto extra) com os campos: nome (string), emoji (string), categoria (string), confianca (Alta|Media|Baixa), tags (array 3 strings), desc (string 2-3 frases), grid (array de arrays par chave-valor ex [[Origem,Brasil]]), preco (objeto com valor string ex R$ 10/kg, referencia string, dica string, melhorEpoca string), nutri (array de arrays par ex [[Vitamina C,85]]), curiosidades (array 3 strings), tecnicas (array 3 strings formato nome: descricao), receitas (array 3 objetos com n string, tipo string, tempo string), receita_detalhada (objeto com n, tempo, rend, ing array strings, steps array strings, tip string, emplatamento string).";
+  var prompt="Identifique o alimento na imagem. Responda SOMENTE com este JSON, sem texto antes ou depois:\n{\"nome\":\"Nome do alimento\",\"emoji\":\"emoji\",\"categoria\":\"categoria\",\"confianca\":\"Alta\",\"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"desc\":\"Descricao em 2 frases sobre o alimento.\",\"grid\":[[\"Origem\",\"valor\"],[\"Colheita\",\"valor\"],[\"Uso\",\"valor\"],[\"Curiosidade\",\"valor\"]],\"preco\":{\"valor\":\"R$ X/kg\",\"referencia\":\"Brasil\",\"dica\":\"dica de compra\",\"melhorEpoca\":\"meses\"},\"nutri\":[[\"Proteina\",\"80\"],[\"Fibras\",\"60\"],[\"Vitaminas\",\"70\"],[\"Calorias\",\"media\"]],\"curiosidades\":[\"curiosidade 1\",\"curiosidade 2\",\"curiosidade 3\"],\"tecnicas\":[\"Tecnica 1: descricao\",\"Tecnica 2: descricao\",\"Tecnica 3: descricao\"],\"receitas\":[{\"n\":\"Receita 1\",\"tipo\":\"Prato\",\"tempo\":\"30min\"},{\"n\":\"Receita 2\",\"tipo\":\"Sobremesa\",\"tempo\":\"20min\"},{\"n\":\"Receita 3\",\"tipo\":\"Entrada\",\"tempo\":\"15min\"}],\"receita_detalhada\":{\"n\":\"Receita 1\",\"tempo\":\"30min\",\"rend\":\"4 porcoes\",\"ing\":[\"ingrediente 1\",\"ingrediente 2\"],\"steps\":[\"Passo 1\",\"Passo 2\",\"Passo 3\"],\"tip\":\"dica do chef\",\"emplatamento\":\"simples\"}}. Adapte para nivel: "+p.prompt+". "+locationCtx;
   var b64=dataUrl.split(",")[1];
   var mt=dataUrl.startsWith("data:image/png")?"image/png":"image/jpeg";
   var apiKey=window.GEMINI_KEY||"";
@@ -597,7 +597,7 @@ function analyzeImg(dataUrl){
       "X-Title":"Flavor Fusion"
     },
     body:JSON.stringify({
-      model:"qwen/qwen2.5-vl-7b-instruct:free",
+      model:"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       messages:[{
         role:"user",
         content:[
