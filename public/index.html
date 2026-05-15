@@ -218,9 +218,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="pc-tags"><span class="pc-tag" style="background:#FBEAF0;color:#993556">Alta gastronomia</span><span class="pc-tag" style="background:#FBEAF0;color:#993556">Emplatamento</span></div></div></div>
     </div>
     <div style="background:#f8f8f8;border-radius:12px;padding:1rem;margin-top:.75rem;border:1px solid #eee">
-      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave do Google AI Studio</div>
-      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Gratuita! Obtenha em <strong>aistudio.google.com</strong> → Get API Key. Sem cartão de crédito.</div>
-      <input id="api-key-input" type="password" placeholder="AIza..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
+      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave do OpenRouter</div>
+      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Gratuita! Obtenha em <strong>openrouter.ai</strong> → Keys → Create Key. Sem cartão de crédito.</div>
+      <input id="api-key-input" type="password" placeholder="sk-or-..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
       <div style="font-size:10px;color:#aaa">A chave fica salva apenas no seu navegador, nunca é enviada a terceiros.</div>
     </div>
     <button class="btn-start" onclick="startApp()">Entrar na Cozinha →</button>
@@ -434,9 +434,9 @@ function startApp(){
   var key=keyInput?keyInput.value.trim():"";
   if(key) {
     window.GEMINI_KEY=key;
-    localStorage.setItem("cn_geminikey",key);
+    localStorage.setItem("cn_orkey",key);
   } else {
-    window.GEMINI_KEY=localStorage.getItem("cn_geminikey")||"";
+    window.GEMINI_KEY=localStorage.getItem("cn_orkey")||"";
   }
   if(!window.GEMINI_KEY){
     alert("Por favor insira sua chave da API Anthropic (sk-ant-...) para continuar.");
@@ -588,20 +588,24 @@ function analyzeImg(dataUrl){
     setStatus("Chave da API não encontrada. Volte e insira sua chave.","err");
     return;
   }
-  fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+apiKey,{
+  fetch("https://openrouter.ai/api/v1/chat/completions",{
     method:"POST",
-    headers:{"Content-Type":"application/json"},
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer "+apiKey,
+      "HTTP-Referer":"https://flavor-fusion-eight.vercel.app",
+      "X-Title":"Flavor Fusion"
+    },
     body:JSON.stringify({
-      contents:[{
-        parts:[
-          {inline_data:{mime_type:mt,data:b64}},
-          {text:prompt}
+      model:"google/gemini-2.0-flash-exp:free",
+      messages:[{
+        role:"user",
+        content:[
+          {type:"image_url",image_url:{url:"data:"+mt+";base64,"+b64}},
+          {type:"text",text:prompt}
         ]
       }],
-      generationConfig:{
-        temperature:0.3,
-        maxOutputTokens:1500
-      }
+      max_tokens:1500
     })
   })
   .then(function(res){return res.json();})
@@ -609,7 +613,7 @@ function analyzeImg(dataUrl){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
     if(data.error) throw new Error(data.error.message||"Erro da API");
-    var text=data.candidates[0].content.parts[0].text||"";
+    var text=data.choices[0].message.content||"";
     text=text.replace("```json","").replace("```","").trim();
     var parsed=JSON.parse(text);
     displayResult(parsed,true);
@@ -619,10 +623,9 @@ function analyzeImg(dataUrl){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
     console.error("Erro:",e);
-    setStatus("Erro ao analisar. Verifique sua chave do Google AI Studio.","err");
+    setStatus("Erro ao analisar. Verifique sua chave do OpenRouter.","err");
   });
 }
-
 function displayResult(food,fromAI){
   curFood=food;
   document.getElementById("r-em").textContent=food.emoji||"🍽️";
