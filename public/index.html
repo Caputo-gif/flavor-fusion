@@ -597,7 +597,7 @@ function analyzeImg(dataUrl){
       "X-Title":"Flavor Fusion"
     },
     body:JSON.stringify({
-      model:"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      model:"qwen/qwen2.5-vl-7b-instruct:free",
       messages:[{
         role:"user",
         content:[
@@ -614,8 +614,12 @@ function analyzeImg(dataUrl){
     document.getElementById("ai-box").classList.add("hidden");
     if(data.error) throw new Error(data.error.message||"Erro da API");
     var text=data.choices[0].message.content||"";
-    text=text.replace("```json","").replace("```","").trim();
-    var parsed=JSON.parse(text);
+    // Remove markdown fences
+    text=text.replace(/```json/g,"").replace(/```/g,"").trim();
+    // Extract JSON object if wrapped in other text
+    var jsonMatch=text.match(/\{[\s\S]*\}/);
+    if(!jsonMatch) throw new Error("JSON nao encontrado na resposta");
+    var parsed=JSON.parse(jsonMatch[0]);
     displayResult(parsed,true);
     setStatus("✅ "+parsed.nome+" identificado! Confiança: "+parsed.confianca);
   })
