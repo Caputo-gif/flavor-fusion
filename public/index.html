@@ -218,9 +218,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="pc-tags"><span class="pc-tag" style="background:#FBEAF0;color:#993556">Alta gastronomia</span><span class="pc-tag" style="background:#FBEAF0;color:#993556">Emplatamento</span></div></div></div>
     </div>
     <div style="background:#f8f8f8;border-radius:12px;padding:1rem;margin-top:.75rem;border:1px solid #eee">
-      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave da API Anthropic</div>
-      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Necessária para identificar alimentos com IA. Obtenha gratuitamente em <strong>console.anthropic.com</strong></div>
-      <input id="api-key-input" type="password" placeholder="sk-ant-..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
+      <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">🔑 Chave do Google AI Studio</div>
+      <div style="font-size:11px;color:#888;margin-bottom:8px;line-height:1.5">Gratuita! Obtenha em <strong>aistudio.google.com</strong> → Get API Key. Sem cartão de crédito.</div>
+      <input id="api-key-input" type="password" placeholder="AIza..." style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-size:13px;outline:none;color:#111;margin-bottom:6px">
       <div style="font-size:10px;color:#aaa">A chave fica salva apenas no seu navegador, nunca é enviada a terceiros.</div>
     </div>
     <button class="btn-start" onclick="startApp()">Entrar na Cozinha →</button>
@@ -433,12 +433,12 @@ function startApp(){
   var keyInput=document.getElementById("api-key-input");
   var key=keyInput?keyInput.value.trim():"";
   if(key) {
-    window.ANTHROPIC_KEY=key;
-    localStorage.setItem("cn_apikey",key);
+    window.GEMINI_KEY=key;
+    localStorage.setItem("cn_geminikey",key);
   } else {
-    window.ANTHROPIC_KEY=localStorage.getItem("cn_apikey")||"";
+    window.GEMINI_KEY=localStorage.getItem("cn_geminikey")||"";
   }
-  if(!window.ANTHROPIC_KEY){
+  if(!window.GEMINI_KEY){
     alert("Por favor insira sua chave da API Anthropic (sk-ant-...) para continuar.");
     return;
   }
@@ -573,41 +573,43 @@ function analyzeImg(dataUrl){
   document.getElementById("rd-area").style.display="none";
   document.getElementById("price-badge").classList.add("hidden");
   document.getElementById("ai-box").classList.remove("hidden");
-  setStatus("Analisando e buscando preços regionais...","loading");
+  setStatus("Analisando com IA...","loading");
   var p=PROFILES[selProfile];
   var locationCtx=userLoc.city
-    ?"Usuario em: "+userLoc.city+". Inclua preco com valores medios locais em reais."
+    ?"Usuario em: "+userLoc.city+". Inclua preco com valores medios locais em reais para esta regiao."
     :"Localizacao indisponivel. Use precos medios do Brasil no campo preco.";
-  var sys="Voce e especialista em culinaria adaptado para: "+p.prompt+". "+locationCtx+" Responda APENAS com JSON valido com os campos: nome, emoji, categoria, confianca (Alta|Media|Baixa), tags (array 3 itens), desc (2-3 frases), grid (array de pares chave-valor), preco (objeto com valor, referencia, dica, melhorEpoca), nutri (array de pares nutriente-percentual 0-100), curiosidades (array 3 itens), tecnicas (array 3 itens formato 'nome: descricao'), receitas (array 3 objetos com n, tipo, tempo), receita_detalhada (objeto com n, tempo, rend, ing array, steps array, tip, emplatamento).";
+  var prompt="Voce e especialista em culinaria adaptado para: "+p.prompt+". "+locationCtx+" Analise a imagem e responda APENAS com JSON valido (sem markdown, sem texto extra) com os campos: nome (string), emoji (string), categoria (string), confianca (Alta|Media|Baixa), tags (array 3 strings), desc (string 2-3 frases), grid (array de arrays par chave-valor ex [[Origem,Brasil]]), preco (objeto com valor string ex R$ 10/kg, referencia string, dica string, melhorEpoca string), nutri (array de arrays par ex [[Vitamina C,85]]), curiosidades (array 3 strings), tecnicas (array 3 strings formato nome: descricao), receitas (array 3 objetos com n string, tipo string, tempo string), receita_detalhada (objeto com n, tempo, rend, ing array strings, steps array strings, tip string, emplatamento string).";
   var b64=dataUrl.split(",")[1];
   var mt=dataUrl.startsWith("data:image/png")?"image/png":"image/jpeg";
-  fetch("https://api.anthropic.com/v1/messages",{
+  var apiKey=window.GEMINI_KEY||"";
+  if(!apiKey){
+    document.getElementById("scan-ov").classList.remove("on");
+    document.getElementById("ai-box").classList.add("hidden");
+    setStatus("Chave da API não encontrada. Volte e insira sua chave.","err");
+    return;
+  }
+  fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+apiKey,{
     method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      "x-api-key": window.ANTHROPIC_KEY||"",
-      "anthropic-version":"2023-06-01",
-      "anthropic-dangerous-direct-browser-access":"true"
-    },
+    headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-sonnet-4-20250514",
-      max_tokens:1500,
-      system:sys,
-      messages:[{
-        role:"user",
-        content:[
-          {type:"image",source:{type:"base64",media_type:mt,data:b64}},
-          {type:"text",text:"Identifique este alimento e responda APENAS com o JSON solicitado."}
+      contents:[{
+        parts:[
+          {inline_data:{mime_type:mt,data:b64}},
+          {text:prompt}
         ]
-      }]
+      }],
+      generationConfig:{
+        temperature:0.3,
+        maxOutputTokens:1500
+      }
     })
   })
   .then(function(res){return res.json();})
   .then(function(data){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
-    if(data.error) throw new Error(data.error.message||data.error);
-    var text=(data.content||[]).map(function(c){return c.text||"";}).join("").trim();
+    if(data.error) throw new Error(data.error.message||"Erro da API");
+    var text=data.candidates[0].content.parts[0].text||"";
     text=text.replace("```json","").replace("```","").trim();
     var parsed=JSON.parse(text);
     displayResult(parsed,true);
@@ -617,7 +619,7 @@ function analyzeImg(dataUrl){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
     console.error("Erro:",e);
-    setStatus("Erro ao analisar. Verifique a chave de API nas configurações.","err");
+    setStatus("Erro ao analisar. Verifique sua chave do Google AI Studio.","err");
   });
 }
 
