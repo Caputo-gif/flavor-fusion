@@ -347,221 +347,357 @@ const PROFILES=[
   {id:0,icon:"👶",name:"Curioso",color:"#E1F5EE",tc:"#0F6E56",lvlName:"Aprendiz",prompt:"iniciante absoluto na cozinha. Use linguagem muito simples, sem termos técnicos. Receitas com no máximo 6 ingredientes e passos detalhados e encorajadores."},
   {id:1,icon:"🧑‍🍳",name:"Caseiro",color:"#E6F1FB",tc:"#185FA5",lvlName:"Cozinheiro",prompt:"cozinheiro caseiro com experiência básica. Linguagem acessível com técnicas simples. Inclua dicas de variações e substituições."},
   {id:2,icon:"👨‍🍳",name:"Gourmet",color:"#FAEEDA",tc:"#854F0B",lvlName:"Gourmet",prompt:"entusiasta gourmet. Use termos técnicos moderados (brunoise, julienne, confit). Receitas elaboradas. Inclua harmonização com vinhos."},
-  {id:3,icon:"🎓",name:"Chef Pro",color:"#FBEAF0",tc:"#993556",lvlName:"Chef Pro",prompt:"chef profissional. Terminologia técnica completa (chiffonade, napage, monter au beurre, fond, gastrique). Alta cozinha, sous vide. Inclua emplatamento profissional e maridagem detalhada."}
+  {id:3,icon:"🎓",name:"Chef Pro",color:"#FBEAF0",tc:"#993556",lvlName:"Chef Pro",prompt:"chef profissional. Terminologia técnica completa. Alta cozinha, sous vide. Inclua emplatamento profissional e maridagem detalhada."}
 ];
+
 const FOODS={
-  morango:{emoji:"🍓",name:"Morango",cat:"Fruta",tags:["Regional SP","Fruta fina"],desc:"Cultivado nas serras de Atibaia-SP. Melhor entre junho e outubro — noites frias intensificam o sabor.",grid:[["Região","Atibaia–SP"],["Colheita","Jun–Out"],["Clima","Serrano"],["Tipo","Fruta fina"]],nutri:[["Vitamina C","95"],["Antioxidantes","88"],["Fibras","40"],["Calorias","baixa"]],curio:["As sementes ficam por fora — são os pontinhos amarelos!","Atibaia é a capital brasileira do morango.","Existe morango branco japonês a R$500 cada!"],tecnicas:["Brunoise: cubinhos 2mm para molhos","Coulis: bater e coar","Macerar: morango+açúcar 30min"],receitas:[{n:"Smoothie de Morango",tipo:"Bebida",tempo:"5min"},{n:"Pavê de Morango",tipo:"Sobremesa",tempo:"40min"},{n:"Carpaccio com Balsâmico",tipo:"Gourmet",tempo:"15min"}],rd:{n:"Pavê de Morango",tempo:"40min+4h geladeira",rend:"8 porções",ing:["500g morangos frescos","2 caixas creme de leite","1 lata leite condensado","200g biscoito champagne","200ml suco de morango"],steps:["Lave e fatie os morangos.","Bata creme com leite condensado até chantilly.","Molhe biscoitos rapidamente no suco.","Monte camadas: biscoito → creme → morango.","Geladeira por 4h mínimo."],tip:"Molhe os biscoitos MUITO rapidamente — encharcado fica mole!",plate:"Espelho de coulis, quenelle de chantilly, microgreens."},preco:{valor:"R$ 8–18/kg",referencia:"Litoral Norte SP",dica:"Caixinhas na feira são mais baratas e frescas",melhorEpoca:"jun–out"}},
-  manga:{emoji:"🥭",name:"Manga",cat:"Fruta",tags:["Nordeste","Exportação"],desc:"Vale do São Francisco é o maior exportador mundial. Palmer tem sabor superior à Tommy Atkins.",grid:[["Região","Petrolina–PE"],["Colheita","Nov–Mar"],["Export","1º do mundo"],["Variedade","Palmer, Tommy"]],nutri:[["Vitamina A","90"],["Vitamina C","75"],["Fibras","55"],["Calorias","média"]],curio:["Sagrada para o hinduísmo.","500+ variedades no mundo.","Brasil exporta para 40+ países."],tecnicas:["Hedgehog cut: corte em cruz","Chutney: redução com especiarias","Gel: agar-agar para texturas modernas"],receitas:[{n:"Manga com Limão",tipo:"Petisco",tempo:"5min"},{n:"Salada com Camarão",tipo:"Entrada",tempo:"20min"},{n:"Chutney Indiano",tipo:"Condimento",tempo:"30min"}],rd:{n:"Salada de Manga com Camarão",tempo:"20min",rend:"4 porções",ing:["2 mangas Palmer","300g camarão limpo","Mix de folhas","Suco de 1 limão","Azeite","Gergelim"],steps:["Tempere e grelhe camarões 2min cada lado.","Corte manga em cubos.","Monte com folhas, finalize com gergelim."],tip:"Seque o camarão com papel toalha antes de grelhar!",plate:"Altura com camarão, vinagrete de maracujá, brotos de coentro."},preco:{valor:"R$ 4–10/unidade",referencia:"Litoral SP",dica:"Palmer tem mais sabor — vale pagar um pouco mais",melhorEpoca:"nov–fev"}},
-  picanha:{emoji:"🥩",name:"Picanha",cat:"Carne",tags:["Brasileiro","Churrasco","Premium"],desc:"O corte mais brasileiro! A capa de gordura é essencial — nunca remova.",grid:[["Corte","Alcatra superior"],["Gordura","Capa obrigatória"],["Ponto","Mal passado"],["Uso","Churrasco, frigideira"]],nutri:[["Proteína","98"],["Ferro","85"],["Zinco","75"],["Calorias","alta"]],curio:["Não existe nos EUA — exclusivamente brasileira!","Fora do Brasil é 'rump cap'.","A capa de gordura derrete e dá sabor único."],tecnicas:["Contra a fibra: corte perpendicular para maciez","Reverse sear: assar lento depois selar","Repouso obrigatório: 5-10min após o fogo"],receitas:[{n:"Picanha na Frigideira",tipo:"Rápido",tempo:"20min"},{n:"Picanha no Churrasco",tipo:"Churrasco",tempo:"30min"},{n:"Picanha ao Molho Madeira",tipo:"Gourmet",tempo:"45min"}],rd:{n:"Picanha na Frigideira com Alho",tempo:"20min",rend:"4 porções",ing:["1kg picanha em fatias 2cm","4 dentes alho","Sal grosso","Pimenta","Manteiga","Alecrim"],steps:["Tempere com sal e pimenta.","Frigideira MUITO quente — fumegando.","Sele a gordura 3min de pé.","3-4min cada lado.","Manteiga+alho+alecrim nos últimos 2min.","REPOUSO 5min."],tip:"Frigideira fria = sem crosta. Tem que estar fumegando!",plate:"Leque fatiado, demi-glace, chips de alho, flor de sal Maldon."},preco:{valor:"R$ 65–120/kg",referencia:"Interior SP",dica:"Peça ao açougueiro: 2cm de espessura, capa intacta",melhorEpoca:"ano todo"}},
-  frango:{emoji:"🍗",name:"Frango",cat:"Carne",tags:["Universal","Proteína"],desc:"Proteína mais consumida do Brasil. O país é o maior exportador mundial.",grid:[["Produção","1º exportador mundial"],["Parte nobre","Coxa/sobrecoxa"],["Parte magra","Peito"],["Estado","SC lidera"]],nutri:[["Proteína","96"],["Niacina","80"],["Selênio","70"],["Calorias","baixa-média"]],curio:["Brasil exporta para 150+ países.","Frango caipira tem muito mais sabor.","SC é o maior produtor do país."],tecnicas:["Brine: 2h em salmoura = suculência","Spatchcock: planificar para assar 40% mais rápido","Confit: cozinhar submerso em gordura"],receitas:[{n:"Frango Frito Crocante",tipo:"Prato",tempo:"30min"},{n:"Frango Assado com Ervas",tipo:"Principal",tempo:"1h"},{n:"Coq au Vin",tipo:"Elaborado",tempo:"1h30"}],rd:{n:"Frango Assado com Ervas",tempo:"1h",rend:"4 porções",ing:["1 frango inteiro","4 dentes alho","Suco de 1 limão","Azeite","Sal, páprica defumada","Alecrim, tomilho","Manteiga"],steps:["Pasta com alho+limão+azeite+temperos.","Coloque debaixo da pele.","Marine 30min.","Asse 200°C por 55min.","Regue com suco a cada 20min.","Descanse 10min."],tip:"Manteiga debaixo da pele = suculento e dourado!",plate:"Porcionamento clássico, jus réduit, purê, brunoise de legumes."},preco:{valor:"R$ 12–22/kg",referencia:"Litoral SP",dica:"Coxa+sobrecoxa: mais sabor e mais barato que o peito",melhorEpoca:"ano todo"}},
-  salmon:{emoji:"🐟",name:"Salmão",cat:"Peixe",tags:["Importado","Ômega-3","Premium"],desc:"O peixe mais consumido nos restaurantes brasileiros. Rico em ômega-3.",grid:[["Origem","Noruega/Chile"],["Gordura","Rica em ômega-3"],["Ponto","Mal passado"],["Uso","Cru, grelhado, defumado"]],nutri:[["Ômega-3","100"],["Proteína","92"],["Vitamina D","85"],["Calorias","média-alta"]],curio:["Cor laranja vem de carotenóides da alimentação.","Salmão selvagem tem sabor mais intenso.","Brasil importa quase todo o salmão consumido."],tecnicas:["Gravlax: cura a frio sal+açúcar+dill","Pele crocante: pressionar nos primeiros 30s","Sous vide: 52°C por 30min"],receitas:[{n:"Salmão na Frigideira",tipo:"Rápido",tempo:"15min"},{n:"Salmão Assado com Ervas",tipo:"Principal",tempo:"25min"},{n:"Gravlax Artesanal",tipo:"Gourmet",tempo:"48h"}],rd:{n:"Salmão na Frigideira",tempo:"15min",rend:"2 porções",ing:["2 filés de salmão com pele","Sal, pimenta","Azeite","1 limão","Alcaparras","Manteiga","Salsinha"],steps:["Seque com papel toalha.","Tempere o lado da carne.","Frigideira quase fumegando.","Pele para baixo, pressione 30s.","4min sem mover, vire, 2min.","Manteiga+limão+alcaparras."],tip:"Nunca mova o salmão — a crosta forma pelo contato!",plate:"Pele dourada para cima, beurre blanc, microgreens, ovas."},preco:{valor:"R$ 60–95/kg",referencia:"São Paulo",dica:"No mercado do peixe de Ubatuba tem peixe fresco local mais saboroso",melhorEpoca:"ano todo"}},
-  arroz:{emoji:"🍚",name:"Arroz",cat:"Grão",tags:["Base da dieta","Nacional"],desc:"Base da alimentação brasileira. Agulhinha para o dia a dia, arbóreo para risoto.",grid:[["Tipo BR","Agulhinha, parboilizado"],["Gourmet","Arbóreo, carnaroli"],["Produção","RS e SC"],["Uso","Infinito"]],nutri:[["Carboidratos","90"],["Manganês","70"],["Vitaminas B","60"],["Calorias","média"]],curio:["Alimenta metade da humanidade.","RS produz 65% do arroz brasileiro.","Risoto usa só arroz italiano."],tecnicas:["Pilaf: refogar no azeite antes da água","Risotto: caldo quente aos poucos","Sushi rice: vinagre+açúcar+sal"],receitas:[{n:"Arroz Branco Soltinho",tipo:"Acompanhamento",tempo:"20min"},{n:"Arroz de Alho Dourado",tipo:"Especial",tempo:"25min"},{n:"Risoto de Funghi",tipo:"Gourmet",tempo:"40min"}],rd:{n:"Risoto de Funghi Secchi",tempo:"40min",rend:"4 porções",ing:["300g arroz arbóreo","30g funghi secchi (guardar a água)","1 cebola","100ml vinho branco","1L caldo legumes quente","80g parmesão","60g manteiga gelada"],steps:["Hidrate funghi 20min. Reserve a água.","Refogue cebola, arroz, frite 2min.","Vinho: mexa até evaporar.","Caldo quente 1 concha por vez, sempre mexendo.","Últimos 5min: funghi + água coada.","Desligue: manteiga gelada + parmesão + mexa vigoroso (mantecatura)."],tip:"Manteiga GELADA + mexer = cremosidade sem nata!",plate:"Espelho em prato fundo aquecido, lascas parmesão, funghi inteiro, óleo de trufas."},preco:{valor:"R$ 4–8/kg",referencia:"Brasil",dica:"Arbóreo (~R$20/kg) vale para risoto — não substitua por agulhinha",melhorEpoca:"ano todo"}},
-  feijao:{emoji:"🫘",name:"Feijão",cat:"Grão",tags:["Nacional","Proteína vegetal"],desc:"Coração da culinária brasileira. Mais de 40 variedades nativas.",grid:[["Variedades","40+ no Brasil"],["Mais popular","Carioca"],["Dupla","Arroz+feijão"],["Produção","PR, MG, GO"]],nutri:[["Proteína","85"],["Ferro","75"],["Fibras","80"],["Calorias","média"]],curio:["Arroz+feijão = proteína completa sem carne.","Feijão preto é do Rio; carioca de SP/MG.","Brasil é o maior consumidor per capita."],tecnicas:["Pressão: 20min após pressão","Caldo cremoso: bater parte","Tropeiro: secar bem antes da farinha"],receitas:[{n:"Feijão Cozido Simples",tipo:"Acompanhamento",tempo:"30min"},{n:"Feijão Tropeiro",tipo:"Típico MG",tempo:"35min"},{n:"Feijoada Gourmet",tipo:"Festivo",tempo:"3h"}],rd:{n:"Feijão Tropeiro Mineiro",tempo:"35min",rend:"6 porções",ing:["500g feijão carioca cozido e BEM escorrido","200g farinha mandioca torrada","150g bacon","4 ovos","3 dentes alho","1 linguiça calabresa"],steps:["Frite bacon até crocante. Reserve.","Frite linguiça. Reserve.","Doure alho, adicione feijão BEM escorrido.","Seque 3min mexendo.","Farinha aos poucos, sempre mexendo.","Quebre ovos e misture rápido.","Finalize com carnes e cheiro-verde."],tip:"Feijão úmido = tropeiro empapado. Escorra MUITO bem!",plate:"Quenelle, ovo frito gema translúcida, couve chiffonade, pimenta biquinho."},preco:{valor:"R$ 5–12/kg",referencia:"Brasil",dica:"Compre em saquinhos nas feiras — mais fresco e barato",melhorEpoca:"ano todo"}},
-  batata:{emoji:"🥔",name:"Batata",cat:"Carboidrato",tags:["Universal","Versátil","Comfort food"],desc:"O tubérculo mais versátil do mundo. 4000+ variedades. Asterix tem mais amido; monalisa mantém forma.",grid:[["Variedades","4000+ no mundo"],["Para fritar","Alta amido (asterix)"],["Para salada","Monalisa — mantém forma"],["Origem","Andes peruanos"]],nutri:[["Potássio","85"],["Vitamina C","60"],["Carboidratos","88"],["Calorias","média"]],curio:["Primeiro vegetal cultivado no espaço!","Existem batatas roxas, azuis e pretas.","A Irlanda perdeu 1 milhão na Grande Fome de 1845."],tecnicas:["Dupla fritura: 150°C depois 180°C","Purê: espremedor + manteiga fria + leite quente","Fondant: assar em caldo após selar"],receitas:[{n:"Batata Cozida com Azeite",tipo:"Simples",tempo:"20min"},{n:"Batata Frita Crocante",tipo:"Petisco",tempo:"30min"},{n:"Purê Cremoso Gourmet",tipo:"Acompanhamento",tempo:"30min"}],rd:{n:"Purê Cremoso Gourmet",tempo:"30min",rend:"6 porções",ing:["1kg batata asterix","100g manteiga gelada","200ml leite quente","Sal","Pimenta branca","Noz-moscada"],steps:["Cozinhe COM casca em água salgada.","Descasque ainda quentes.","Espremedor — NUNCA liquidificador.","Manteiga gelada aos poucos, mexendo.","Leite quente aos poucos.","Ajuste sal, pimenta, noz-moscada."],tip:"Liquidificador vira cola! Espremedor é obrigatório.",plate:"Quenelle dupla, jus réduit, ciboulette, manteiga clarificada."},preco:{valor:"R$ 3–6/kg",referencia:"Brasil",dica:"Asterix (casca vermelha) para fritar; monalisa para cozido",melhorEpoca:"ano todo"}},
-  queijo:{emoji:"🧀",name:"Queijo",cat:"Laticínio",tags:["MG lidera","Diversidade","Gourmet"],desc:"Brasil produz 1000+ tipos. MG é a capital — do fresco ao canastra maturado.",grid:[["Capital","Minas Gerais"],["Tipos","1000+ variedades"],["Destaque","Canastra, coalho, brie"],["Uso","Tábuas, risotos, gratinados"]],nutri:[["Proteína","88"],["Cálcio","95"],["Vitamina B12","75"],["Calorias","alta"]],curio:["O Canastra tem denominação de origem — como o champanhe!","O coalho é o único que pode ser grelhado sem derreter.","Brasil ganhou medalhas superando França e Itália."],tecnicas:["Temperatura ambiente: 30min antes","Fonduta: banho-maria com amido","Gratinado: grill 250°C"],receitas:[{n:"Queijo Coalho Grelhado",tipo:"Petisco",tempo:"10min"},{n:"Fondue de Queijo",tipo:"Compartilhado",tempo:"25min"},{n:"Tábua Gourmet",tipo:"Entrada",tempo:"15min"}],rd:{n:"Queijo Coalho Grelhado",tempo:"10min",rend:"4 porções",ing:["400g queijo coalho em fatias","Mel de qualidade","Orégano fresco","Pimenta rosa"],steps:["Frigideira seca em fogo alto — sem azeite.","Fatias de queijo. Não mexa.","2-3min até crosta dourada.","Vire com espátula.","Sirva com fio de mel."],tip:"Só o coalho aguenta grelhar sem derreter!",plate:"Fatia inclinada em ardósia, mel trufado, nozes caramelizadas, flores comestíveis."},preco:{valor:"R$ 35–90/kg",referencia:"Litoral SP",dica:"Coalho ~R$35/kg; Canastra artesanal R$80–120/kg",melhorEpoca:"ano todo"}},
-  brocolis:{emoji:"🥦",name:"Brócolis",cat:"Vegetal",tags:["Crucífero","Saúde","Versátil"],desc:"Rico em sulforafano anti-inflamatório. Melhor al dente — nunca cozinhe demais!",grid:[["Origem","Mediterrâneo"],["Colheita","Abr–Jun, Ago–Out"],["Parte","Florete E talo"],["Cozimento","Al dente 3min máx"]],nutri:[["Vitamina C","92"],["Vitamina K","88"],["Sulforafano","95"],["Calorias","muito baixa"]],curio:["O talo tem mais nutrientes que os floretes!","Cozinhar demais destrói 50% das vitaminas.","Levado ao mundo por imigrantes italianos."],tecnicas:["Branqueamento: 2min+gelo = verde vibrante","Assar 220°C: crocante e caramelizado","Crema: bater cozido com azeite e alho"],receitas:[{n:"Brócolis no Vapor",tipo:"Simples",tempo:"10min"},{n:"Brócolis Assado com Parmesão",tipo:"Petisco",tempo:"20min"},{n:"Velouté de Brócolis",tipo:"Gourmet",tempo:"30min"}],rd:{n:"Brócolis Assado com Parmesão",tempo:"20min",rend:"4 porções",ing:["1 cabeça brócolis","4 col sopa azeite","3 dentes alho fatiados","50g parmesão","Sal, pimenta calabresa","Limão"],steps:["Forno 220°C pré-aquecido.","Floretes em CAMADA ÚNICA.","Azeite, alho, sal, pimenta.","15-18min até caramelizar.","Parmesão + 3min.","Finalizar com limão."],tip:"Camada única é lei — empilhado vira vapor e fica mole!",plate:"Floretes em altura, telha parmesão, espuma alho negro, óleo avelã."},preco:{valor:"R$ 5–10/unidade",referencia:"Litoral SP",dica:"Miolo verde fechado = fresco. Aberto = velho.",melhorEpoca:"abr–jun, ago–out"}}
+  morango:{emoji:"🍓",name:"Morango",cat:"Fruta",tags:["Regional SP","Fruta fina"],desc:"Cultivado nas serras de Atibaia-SP. Melhor entre junho e outubro.",grid:[["Região","Atibaia–SP"],["Colheita","Jun–Out"],["Clima","Serrano"],["Tipo","Fruta fina"]],nutri:[["Vitamina C","95"],["Antioxidantes","88"],["Fibras","40"],["Calorias","baixa"]],curio:["As sementes ficam por fora — os pontinhos amarelos!","Atibaia é a capital brasileira do morango.","Existe morango branco japonês a R$500 cada!"],tecnicas:["Brunoise: cubinhos 2mm para molhos","Coulis: bater e coar","Macerar: morango mais açúcar 30min"],receitas:[{n:"Smoothie de Morango",tipo:"Bebida",tempo:"5min"},{n:"Pavê de Morango",tipo:"Sobremesa",tempo:"40min"},{n:"Carpaccio com Balsâmico",tipo:"Gourmet",tempo:"15min"}],rd:{n:"Pavê de Morango",tempo:"40min",rend:"8 porções",ing:["500g morangos frescos","2 caixas creme de leite","1 lata leite condensado","200g biscoito champagne","200ml suco de morango"],steps:["Lave e fatie os morangos.","Bata creme com leite condensado até chantilly.","Molhe biscoitos rapidamente no suco.","Monte camadas: biscoito, creme, morango.","Geladeira por 4h mínimo."],tip:"Molhe os biscoitos MUITO rapidamente — encharcado fica mole!",plate:"Espelho de coulis, quenelle de chantilly, microgreens."},preco:{valor:"R$ 8–18/kg",referencia:"Litoral Norte SP",dica:"Caixinhas na feira são mais baratas e frescas",melhorEpoca:"jun–out"}},
+  manga:{emoji:"🥭",name:"Manga",cat:"Fruta",tags:["Nordeste","Exportação"],desc:"Vale do São Francisco é o maior exportador mundial.",grid:[["Região","Petrolina–PE"],["Colheita","Nov–Mar"],["Export","1º do mundo"],["Variedade","Palmer, Tommy"]],nutri:[["Vitamina A","90"],["Vitamina C","75"],["Fibras","55"],["Calorias","média"]],curio:["Sagrada para o hinduísmo.","500 mais variedades no mundo.","Brasil exporta para 40 mais países."],tecnicas:["Hedgehog cut: corte em cruz","Chutney: redução com especiarias","Gel: agar-agar para texturas modernas"],receitas:[{n:"Manga com Limão",tipo:"Petisco",tempo:"5min"},{n:"Salada com Camarão",tipo:"Entrada",tempo:"20min"},{n:"Chutney Indiano",tipo:"Condimento",tempo:"30min"}],rd:{n:"Salada de Manga com Camarão",tempo:"20min",rend:"4 porções",ing:["2 mangas Palmer","300g camarão limpo","Mix de folhas","Suco de 1 limão","Azeite","Gergelim"],steps:["Tempere e grelhe camarões 2min cada lado.","Corte manga em cubos.","Monte com folhas e finalize com gergelim."],tip:"Seque o camarão com papel toalha antes de grelhar!",plate:"Vinagrete de maracujá em pontos e brotos de coentro."},preco:{valor:"R$ 4–10/unidade",referencia:"Litoral SP",dica:"Palmer tem mais sabor — vale pagar um pouco mais",melhorEpoca:"nov–fev"}},
+  picanha:{emoji:"🥩",name:"Picanha",cat:"Carne",tags:["Brasileiro","Churrasco","Premium"],desc:"O corte mais brasileiro! A capa de gordura é essencial — nunca remova.",grid:[["Corte","Alcatra superior"],["Gordura","Capa obrigatória"],["Ponto","Mal passado"],["Uso","Churrasco, frigideira"]],nutri:[["Proteína","98"],["Ferro","85"],["Zinco","75"],["Calorias","alta"]],curio:["Não existe nos EUA — exclusivamente brasileira!","Fora do Brasil é rump cap.","A capa de gordura derrete e dá sabor único."],tecnicas:["Contra a fibra: corte perpendicular","Reverse sear: assar lento depois selar","Repouso: 5 a 10min após o fogo"],receitas:[{n:"Picanha na Frigideira",tipo:"Rápido",tempo:"20min"},{n:"Picanha no Churrasco",tipo:"Churrasco",tempo:"30min"},{n:"Picanha ao Molho Madeira",tipo:"Gourmet",tempo:"45min"}],rd:{n:"Picanha na Frigideira com Alho",tempo:"20min",rend:"4 porções",ing:["1kg picanha em fatias 2cm","4 dentes alho","Sal grosso","Pimenta","Manteiga","Alecrim"],steps:["Tempere com sal e pimenta.","Frigideira MUITO quente.","Sele a gordura 3min de pé.","3 a 4min cada lado.","Manteiga mais alho mais alecrim nos últimos 2min.","REPOUSO 5min."],tip:"Frigideira fria é igual a sem crosta. Tem que estar fumegando!",plate:"Leque fatiado, demi-glace, chips de alho, flor de sal."},preco:{valor:"R$ 65–120/kg",referencia:"Interior SP",dica:"Peça ao açougueiro 2cm de espessura com capa intacta",melhorEpoca:"ano todo"}},
+  frango:{emoji:"🍗",name:"Frango",cat:"Carne",tags:["Universal","Proteína"],desc:"Proteína mais consumida do Brasil. O país é o maior exportador mundial.",grid:[["Produção","1º exportador mundial"],["Parte nobre","Coxa e sobrecoxa"],["Parte magra","Peito"],["Estado","SC lidera"]],nutri:[["Proteína","96"],["Niacina","80"],["Selênio","70"],["Calorias","baixa a média"]],curio:["Brasil exporta para 150 países.","Frango caipira tem muito mais sabor.","SC é o maior produtor do país."],tecnicas:["Brine: 2h em salmoura para suculência","Spatchcock: planificar para assar 40 por cento mais rápido","Confit: cozinhar submerso em gordura"],receitas:[{n:"Frango Frito Crocante",tipo:"Prato",tempo:"30min"},{n:"Frango Assado com Ervas",tipo:"Principal",tempo:"1h"},{n:"Coq au Vin",tipo:"Elaborado",tempo:"1h30"}],rd:{n:"Frango Assado com Ervas",tempo:"1h",rend:"4 porções",ing:["1 frango inteiro","4 dentes alho","Suco de 1 limão","Azeite","Sal e páprica defumada","Alecrim e tomilho","Manteiga"],steps:["Pasta com alho, limão, azeite e temperos.","Coloque debaixo da pele.","Marine 30min.","Asse 200°C por 55min.","Regue com suco a cada 20min.","Descanse 10min."],tip:"Manteiga debaixo da pele é o segredo do frango suculento e dourado!",plate:"Porcionamento clássico, jus réduit, purê e brunoise de legumes."},preco:{valor:"R$ 12–22/kg",referencia:"Litoral SP",dica:"Coxa mais sobrecoxa tem mais sabor e é mais barato que o peito",melhorEpoca:"ano todo"}},
+  salmon:{emoji:"🐟",name:"Salmão",cat:"Peixe",tags:["Importado","Ômega-3","Premium"],desc:"O peixe mais consumido nos restaurantes brasileiros. Rico em ômega-3.",grid:[["Origem","Noruega e Chile"],["Gordura","Rica em ômega-3"],["Ponto","Mal passado"],["Uso","Cru, grelhado, defumado"]],nutri:[["Ômega-3","100"],["Proteína","92"],["Vitamina D","85"],["Calorias","média a alta"]],curio:["Cor laranja vem de carotenóides da alimentação.","Salmão selvagem tem sabor mais intenso.","Brasil importa quase todo o salmão consumido."],tecnicas:["Gravlax: cura a frio com sal, açúcar e dill","Pele crocante: pressionar nos primeiros 30s","Sous vide: 52 graus por 30min"],receitas:[{n:"Salmão na Frigideira",tipo:"Rápido",tempo:"15min"},{n:"Salmão Assado com Ervas",tipo:"Principal",tempo:"25min"},{n:"Gravlax Artesanal",tipo:"Gourmet",tempo:"48h"}],rd:{n:"Salmão na Frigideira",tempo:"15min",rend:"2 porções",ing:["2 filés de salmão com pele","Sal e pimenta","Azeite","1 limão","Alcaparras","Manteiga","Salsinha"],steps:["Seque com papel toalha.","Tempere o lado da carne.","Frigideira quase fumegando.","Pele para baixo, pressione 30s.","4min sem mover, vire, 2min.","Manteiga mais limão mais alcaparras."],tip:"Nunca mova o salmão — a crosta forma pelo contato contínuo!",plate:"Pele dourada para cima, beurre blanc, microgreens e ovas."},preco:{valor:"R$ 60–95/kg",referencia:"São Paulo",dica:"Em Ubatuba tem peixe fresco local mais saboroso e barato",melhorEpoca:"ano todo"}},
+  arroz:{emoji:"🍚",name:"Arroz",cat:"Grão",tags:["Base da dieta","Nacional"],desc:"Base da alimentação brasileira. Agulhinha para o dia a dia, arbóreo para risoto.",grid:[["Tipo BR","Agulhinha e parboilizado"],["Gourmet","Arbóreo e carnaroli"],["Produção","RS e SC"],["Uso","Infinito"]],nutri:[["Carboidratos","90"],["Manganês","70"],["Vitaminas B","60"],["Calorias","média"]],curio:["Alimenta metade da humanidade.","RS produz 65 por cento do arroz brasileiro.","Risoto usa só arroz italiano."],tecnicas:["Pilaf: refogar no azeite antes da água","Risotto: caldo quente aos poucos","Sushi rice: vinagre, açúcar e sal"],receitas:[{n:"Arroz Branco Soltinho",tipo:"Acompanhamento",tempo:"20min"},{n:"Arroz de Alho Dourado",tipo:"Especial",tempo:"25min"},{n:"Risoto de Funghi",tipo:"Gourmet",tempo:"40min"}],rd:{n:"Risoto de Funghi Secchi",tempo:"40min",rend:"4 porções",ing:["300g arroz arbóreo","30g funghi secchi","1 cebola","100ml vinho branco","1L caldo legumes quente","80g parmesão","60g manteiga gelada"],steps:["Hidrate funghi 20min. Reserve a água.","Refogue cebola, arroz, frite 2min.","Vinho: mexa até evaporar.","Caldo quente 1 concha por vez sempre mexendo.","Últimos 5min: funghi mais água coada.","Desligue: manteiga gelada mais parmesão mais mexer vigoroso."],tip:"Manteiga GELADA mais mexer vigoroso é igual a cremosidade sem nata!",plate:"Espelho em prato fundo aquecido, lascas de parmesão, funghi inteiro, óleo de trufas."},preco:{valor:"R$ 4–8/kg",referencia:"Brasil",dica:"Arbóreo vale para risoto — não substitua por agulhinha",melhorEpoca:"ano todo"}},
+  feijao:{emoji:"🫘",name:"Feijão",cat:"Grão",tags:["Nacional","Proteína vegetal"],desc:"Coração da culinária brasileira. Mais de 40 variedades nativas.",grid:[["Variedades","40 mais no Brasil"],["Mais popular","Carioca"],["Dupla","Arroz mais feijão"],["Produção","PR, MG, GO"]],nutri:[["Proteína","85"],["Ferro","75"],["Fibras","80"],["Calorias","média"]],curio:["Arroz mais feijão formam proteína completa sem carne.","Feijão preto é do Rio; carioca de SP e MG.","Brasil é o maior consumidor per capita."],tecnicas:["Pressão: 20min após pressão","Caldo cremoso: bater parte","Tropeiro: secar bem antes da farinha"],receitas:[{n:"Feijão Cozido Simples",tipo:"Acompanhamento",tempo:"30min"},{n:"Feijão Tropeiro",tipo:"Típico MG",tempo:"35min"},{n:"Feijoada Gourmet",tipo:"Festivo",tempo:"3h"}],rd:{n:"Feijão Tropeiro Mineiro",tempo:"35min",rend:"6 porções",ing:["500g feijão carioca cozido e bem escorrido","200g farinha mandioca torrada","150g bacon","4 ovos","3 dentes alho","1 linguiça calabresa"],steps:["Frite bacon até crocante. Reserve.","Frite linguiça. Reserve.","Doure alho, adicione feijão bem escorrido.","Seque 3min mexendo.","Farinha aos poucos sempre mexendo.","Quebre ovos e misture rápido.","Finalize com carnes e cheiro-verde."],tip:"Feijão úmido é igual a tropeiro empapado. Escorra MUITO bem!",plate:"Quenelle, ovo frito com gema translúcida, couve e pimenta biquinho."},preco:{valor:"R$ 5–12/kg",referencia:"Brasil",dica:"Compre em saquinhos nas feiras — mais fresco e barato",melhorEpoca:"ano todo"}},
+  batata:{emoji:"🥔",name:"Batata",cat:"Carboidrato",tags:["Universal","Versátil","Comfort food"],desc:"O tubérculo mais versátil do mundo. 4000 mais variedades.",grid:[["Variedades","4000 mais no mundo"],["Para fritar","Alta amido"],["Para salada","Monalisa"],["Origem","Andes peruanos"]],nutri:[["Potássio","85"],["Vitamina C","60"],["Carboidratos","88"],["Calorias","média"]],curio:["Primeiro vegetal cultivado no espaço!","Existem batatas roxas, azuis e pretas.","A Irlanda perdeu 1 milhão na Grande Fome de 1845."],tecnicas:["Dupla fritura: 150 depois 180 graus","Purê: espremedor mais manteiga fria mais leite quente","Fondant: assar em caldo após selar"],receitas:[{n:"Batata Cozida com Azeite",tipo:"Simples",tempo:"20min"},{n:"Batata Frita Crocante",tipo:"Petisco",tempo:"30min"},{n:"Purê Cremoso Gourmet",tipo:"Acompanhamento",tempo:"30min"}],rd:{n:"Purê Cremoso Gourmet",tempo:"30min",rend:"6 porções",ing:["1kg batata asterix","100g manteiga gelada","200ml leite quente","Sal","Pimenta branca","Noz-moscada"],steps:["Cozinhe com casca em água salgada.","Descasque ainda quentes.","Espremedor — NUNCA liquidificador.","Manteiga gelada aos poucos mexendo.","Leite quente aos poucos.","Ajuste sal, pimenta, noz-moscada."],tip:"Liquidificador vira cola! Espremedor é obrigatório.",plate:"Quenelle dupla, jus réduit, ciboulette e manteiga clarificada."},preco:{valor:"R$ 3–6/kg",referencia:"Brasil",dica:"Asterix para fritar; monalisa para cozido",melhorEpoca:"ano todo"}},
+  queijo:{emoji:"🧀",name:"Queijo",cat:"Laticínio",tags:["MG lidera","Diversidade","Gourmet"],desc:"Brasil produz 1000 mais tipos. MG é a capital do queijo artesanal.",grid:[["Capital","Minas Gerais"],["Tipos","1000 mais variedades"],["Destaque","Canastra, coalho, brie"],["Uso","Tábuas, risotos, gratinados"]],nutri:[["Proteína","88"],["Cálcio","95"],["Vitamina B12","75"],["Calorias","alta"]],curio:["O Canastra tem denominação de origem como o champanhe!","O coalho é o único que pode ser grelhado sem derreter.","Brasil ganhou medalhas superando França e Itália."],tecnicas:["Temperatura ambiente: 30min antes","Fonduta: banho-maria com amido","Gratinado: grill 250 graus"],receitas:[{n:"Queijo Coalho Grelhado",tipo:"Petisco",tempo:"10min"},{n:"Fondue de Queijo",tipo:"Compartilhado",tempo:"25min"},{n:"Tábua Gourmet",tipo:"Entrada",tempo:"15min"}],rd:{n:"Queijo Coalho Grelhado",tempo:"10min",rend:"4 porções",ing:["400g queijo coalho em fatias","Mel de qualidade","Orégano fresco","Pimenta rosa"],steps:["Frigideira seca em fogo alto sem azeite.","Fatias de queijo. Não mexa.","2 a 3min até crosta dourada.","Vire com espátula.","Sirva com fio de mel."],tip:"Só o coalho aguenta grelhar sem derreter!",plate:"Fatia inclinada em ardósia, mel trufado, nozes caramelizadas, flores comestíveis."},preco:{valor:"R$ 35–90/kg",referencia:"Litoral SP",dica:"Coalho em torno de R$35/kg; Canastra artesanal R$80 a 120/kg",melhorEpoca:"ano todo"}},
+  brocolis:{emoji:"🥦",name:"Brócolis",cat:"Vegetal",tags:["Crucífero","Saúde","Versátil"],desc:"Rico em sulforafano anti-inflamatório. Melhor al dente — nunca cozinhe demais!",grid:[["Origem","Mediterrâneo"],["Colheita","Abr a Jun e Ago a Out"],["Parte","Florete e talo"],["Cozimento","Al dente 3min máx"]],nutri:[["Vitamina C","92"],["Vitamina K","88"],["Sulforafano","95"],["Calorias","muito baixa"]],curio:["O talo tem mais nutrientes que os floretes!","Cozinhar demais destrói 50 por cento das vitaminas.","Levado ao mundo por imigrantes italianos."],tecnicas:["Branqueamento: 2min mais gelo para verde vibrante","Assar 220 graus: crocante e caramelizado","Crema: bater cozido com azeite e alho"],receitas:[{n:"Brócolis no Vapor",tipo:"Simples",tempo:"10min"},{n:"Brócolis Assado com Parmesão",tipo:"Petisco",tempo:"20min"},{n:"Velouté de Brócolis",tipo:"Gourmet",tempo:"30min"}],rd:{n:"Brócolis Assado com Parmesão",tempo:"20min",rend:"4 porções",ing:["1 cabeça brócolis","4 col sopa azeite","3 dentes alho fatiados","50g parmesão","Sal e pimenta calabresa","Limão"],steps:["Forno 220 graus pré-aquecido.","Floretes em CAMADA ÚNICA.","Azeite, alho, sal e pimenta.","15 a 18min até caramelizar.","Parmesão mais 3min.","Finalizar com limão."],tip:"Camada única é lei — empilhado vira vapor e fica mole!",plate:"Floretes em altura, telha de parmesão, espuma de alho negro e óleo de avelã."},preco:{valor:"R$ 5–10/unidade",referencia:"Litoral SP",dica:"Miolo verde fechado significa fresco. Aberto significa velho.",melhorEpoca:"abr a jun e ago a out"}}
 };
+
 const CATS=["Todos","Fruta","Carne","Peixe","Grão","Carboidrato","Vegetal","Laticínio"];
 const FREE_ING=3;
-let selProfile=0,selCat="Todos",curFood=null,camActive=false,camStream=null;
+let selProfile=0, selCat="Todos", curFood=null, camActive=false, camStream=null;
 let userLoc={lat:null,lon:null,city:null};
 let usage={photos:0,ingredients:0,unlimited:false};
 let pendingAct=null;
 
 function loadUsage(){
   const today=new Date().toISOString().slice(0,10);
-  try{const s=JSON.parse(localStorage.getItem("cn_usage")||"{}");
-    if(s.date===today)usage=s;else usage={photos:0,ingredients:0,unlimited:false};}catch(e){}
+  try{
+    const s=JSON.parse(localStorage.getItem("cn_usage")||"{}");
+    if(s.date===today) usage=s;
+    else usage={photos:0,ingredients:0,unlimited:false};
+  }catch(e){}
   updateUsageUI();
 }
+
 function saveUsage(){
   const today=new Date().toISOString().slice(0,10);
-  localStorage.setItem("cn_usage",JSON.stringify({...usage,date:today}));
+  localStorage.setItem("cn_usage",JSON.stringify(Object.assign({},usage,{date:today})));
 }
+
 function updateUsageUI(){
   const pp=document.getElementById("usage-photo-pill");
   const ip=document.getElementById("usage-ing-pill");
   const ub=document.getElementById("unlock-ing-btn");
   pp.textContent="📷 "+usage.photos+" foto"+(usage.photos!==1?"s":"")+" analisada"+(usage.photos!==1?"s":"");
   pp.className="usage-pill "+(usage.photos>0?"u-blue":"u-green");
-  if(usage.unlimited){ip.textContent="🌟 Pesquisas ilimitadas hoje";ip.className="usage-pill u-blue";ub.style.display="none";}
-  else{const r=Math.max(0,FREE_ING-usage.ingredients);
+  if(usage.unlimited){
+    ip.textContent="🌟 Pesquisas ilimitadas hoje";
+    ip.className="usage-pill u-blue";
+    ub.style.display="none";
+  } else {
+    const r=Math.max(0,FREE_ING-usage.ingredients);
     ip.textContent=r>0?"🔍 "+r+" pesquisa"+(r!==1?"s":"")+" grátis":"🔒 Limite atingido";
-    ip.className="usage-pill "+(r>0?"u-green":"u-red");ub.style.display=r===0?"":"none";}
+    ip.className="usage-pill "+(r>0?"u-green":"u-red");
+    ub.style.display=r===0?"":"none";
+  }
 }
+
 function getLocation(){
-  if(!navigator.geolocation)return;
-  navigator.geolocation.getCurrentPosition(p=>{
-    userLoc.lat=p.coords.latitude;userLoc.lon=p.coords.longitude;
+  if(!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(function(p){
+    userLoc.lat=p.coords.latitude;
+    userLoc.lon=p.coords.longitude;
     fetch("https://nominatim.openstreetmap.org/reverse?lat="+userLoc.lat+"&lon="+userLoc.lon+"&format=json&accept-language=pt")
-      .then(r=>r.json()).then(d=>{
+      .then(function(r){return r.json();})
+      .then(function(d){
         const a=d.address;
         userLoc.city=[a.city||a.town||a.village||a.county,a.state].filter(Boolean).join(", ");
         setStatus("📍 "+userLoc.city+" detectado. Pronto para analisar!");
-      }).catch(()=>{});
-  },()=>{});
+      }).catch(function(){});
+  },function(){});
 }
-function selectProfile(i){selProfile=i;document.querySelectorAll(".profile-card").forEach((c,j)=>c.classList.toggle("sel",j===i));}
+
+function selectProfile(i){
+  selProfile=i;
+  document.querySelectorAll(".profile-card").forEach(function(c,j){c.classList.toggle("sel",j===i);});
+}
+
 function startApp(){
   const p=PROFILES[selProfile];
   document.getElementById("screen-profile").classList.add("hidden");
   document.getElementById("screen-main").classList.remove("hidden");
   document.getElementById("chip-icon").textContent=p.icon;
   document.getElementById("chip-name").textContent=p.name;
-  const lc=document.getElementById("lvl-chip");lc.textContent=p.lvlName;lc.style.background=p.color;lc.style.color=p.tc;
-  loadUsage();getLocation();
+  const lc=document.getElementById("lvl-chip");
+  lc.textContent=p.lvlName;
+  lc.style.background=p.color;
+  lc.style.color=p.tc;
+  loadUsage();
+  getLocation();
   const params=new URLSearchParams(window.location.search);
-  const type=params.get("type"),sid=params.get("session_id");
+  const type=params.get("type");
+  const sid=params.get("session_id");
   if(type&&sid){
     if(type==="photo"){usage.photos++;saveUsage();}
     if(type==="unlimited"){usage.unlimited=true;saveUsage();}
-    updateUsageUI();setStatus("✅ Pagamento confirmado! Aproveite.");
+    updateUsageUI();
+    setStatus("✅ Pagamento confirmado! Aproveite.");
     window.history.replaceState({},"","/");
   }
 }
-function changeProfile(){document.getElementById("screen-main").classList.add("hidden");document.getElementById("screen-profile").classList.remove("hidden");stopCam();}
+
+function changeProfile(){
+  document.getElementById("screen-main").classList.add("hidden");
+  document.getElementById("screen-profile").classList.remove("hidden");
+  stopCam();
+}
+
 function openModal(id){document.getElementById(id).classList.remove("hidden");}
 function closeModal(id){document.getElementById(id).classList.add("hidden");}
-async function pay(type){
-  closeModal("modal-photo");closeModal("modal-ingredient");
-  // DEMO MODE — remove in production and use Stripe
-  if(type==="photo"){usage.photos++;saveUsage();updateUsageUI();setStatus("✅ Acesso liberado! Analisando foto...");if(pendingAct){pendingAct();pendingAct=null;}return;}
-  if(type==="unlimited"){usage.unlimited=true;saveUsage();updateUsageUI();setStatus("✅ Acesso ilimitado liberado!");if(pendingAct){pendingAct();pendingAct=null;}return;}
+
+function pay(type){
+  closeModal("modal-photo");
+  closeModal("modal-ingredient");
+  if(type==="photo"){
+    usage.photos++;
+    saveUsage();
+    updateUsageUI();
+    setStatus("✅ Acesso liberado! Analisando foto...");
+    if(pendingAct){pendingAct();pendingAct=null;}
+    return;
+  }
+  if(type==="unlimited"){
+    usage.unlimited=true;
+    saveUsage();
+    updateUsageUI();
+    setStatus("✅ Acesso ilimitado liberado!");
+    if(pendingAct){pendingAct();pendingAct=null;}
+    return;
+  }
 }
-function setStatus(txt,state="ok"){
+
+function setStatus(txt,state){
+  state=state||"ok";
   document.getElementById("s-text").textContent=txt;
   document.getElementById("s-dot").className="s-dot"+(state==="loading"?" loading":state==="err"?" err":"");
 }
+
 function switchTab(t){
-  ["camera","library","shop"].forEach((tab,i)=>{
+  var tabs=["camera","library","shop"];
+  tabs.forEach(function(tab,i){
     document.getElementById("tab-"+tab).classList.toggle("hidden",tab!==t);
     document.querySelectorAll(".main-tab")[i].classList.toggle("active",tab===t);
   });
-  if(t==="library")renderLib();
+  if(t==="library") renderLib();
 }
-async function toggleCam(){
+
+function toggleCam(){
   if(camActive){stopCam();return;}
-  try{setStatus("Acessando câmera...","loading");
-    camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}});
-    const v=document.getElementById("video-el");v.srcObject=camStream;v.style.display="block";
-    document.getElementById("cam-ph").style.display="none";
-    document.getElementById("img-prev").style.display="none";
-    document.getElementById("btn-cam").textContent="⏹️ Parar";
-    document.getElementById("btn-snap").classList.remove("hidden");
-    camActive=true;setStatus("Câmera ativa! Aponte para o alimento.");
-  }catch(e){setStatus("Câmera indisponível. Use a Galeria.","err");}
+  setStatus("Acessando câmera...","loading");
+  navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}})
+    .then(function(stream){
+      camStream=stream;
+      var v=document.getElementById("video-el");
+      v.srcObject=stream;
+      v.style.display="block";
+      document.getElementById("cam-ph").style.display="none";
+      document.getElementById("img-prev").style.display="none";
+      document.getElementById("btn-cam").textContent="⏹️ Parar";
+      document.getElementById("btn-snap").classList.remove("hidden");
+      camActive=true;
+      setStatus("Câmera ativa! Aponte para o alimento.");
+    })
+    .catch(function(){setStatus("Câmera indisponível. Use a Galeria.","err");});
 }
+
 function stopCam(){
-  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+  if(camStream){camStream.getTracks().forEach(function(t){t.stop();});camStream=null;}
   document.getElementById("video-el").style.display="none";
   document.getElementById("btn-cam").textContent="📷 Câmera";
-  document.getElementById("btn-snap").classList.add("hidden");camActive=false;
+  document.getElementById("btn-snap").classList.add("hidden");
+  camActive=false;
 }
+
 function handleFile(e){
-  const f=e.target.files[0];if(!f)return;stopCam();
-  const r=new FileReader();
-  r.onload=ev=>{
+  var f=e.target.files[0];
+  if(!f) return;
+  stopCam();
+  var r=new FileReader();
+  r.onload=function(ev){
     document.getElementById("img-prev").src=ev.target.result;
     document.getElementById("img-prev").style.display="block";
     document.getElementById("cam-ph").style.display="none";
-    pendingAct=()=>analyzeImg(ev.target.result);
+    pendingAct=function(){analyzeImg(ev.target.result);};
     openModal("modal-photo");
-  };r.readAsDataURL(f);
+  };
+  r.readAsDataURL(f);
 }
+
 function snap(){
-  const v=document.getElementById("video-el"),c=document.getElementById("canvas-el");
-  c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);
-  const d=c.toDataURL("image/jpeg",.85);
-  document.getElementById("img-prev").src=d;document.getElementById("img-prev").style.display="block";
-  document.getElementById("video-el").style.display="none";stopCam();
-  pendingAct=()=>analyzeImg(d);openModal("modal-photo");
+  var v=document.getElementById("video-el");
+  var c=document.getElementById("canvas-el");
+  c.width=v.videoWidth;
+  c.height=v.videoHeight;
+  c.getContext("2d").drawImage(v,0,0);
+  var d=c.toDataURL("image/jpeg",0.85);
+  document.getElementById("img-prev").src=d;
+  document.getElementById("img-prev").style.display="block";
+  document.getElementById("video-el").style.display="none";
+  stopCam();
+  pendingAct=function(){analyzeImg(d);};
+  openModal("modal-photo");
 }
-async function analyzeImg(dataUrl){
+
+function analyzeImg(dataUrl){
   document.getElementById("scan-ov").classList.add("on");
   document.getElementById("result-area").style.display="none";
   document.getElementById("rd-area").style.display="none";
   document.getElementById("price-badge").classList.add("hidden");
   document.getElementById("ai-box").classList.remove("hidden");
   setStatus("Analisando e buscando preços regionais...","loading");
-  const p=PROFILES[selProfile];
-  const sys='Voce e especialista em culinaria adaptado para: '+p.prompt+'. Responda APENAS com JSON valido: {"nome":"Nome","emoji":"emoji","categoria":"cat","confianca":"Alta|Media|Baixa","tags":["t1","t2","t3"],"desc":"Descricao 2-3 frases","grid":[["Origem","v"],["Disponibilidade","v"],["Melhor uso","v"],["Curiosidade","v"]],"preco":{"valor":"R$ X-Y/kg ou unidade","referencia":"cidade/regiao","dica":"dica de compra","melhorEpoca":"meses"},"nutri":[["Nutriente","0-100"],["N2","0-100"],["N3","0-100"],["Calorias","baixa|media|alta|muito baixa|muito alta"]],"curiosidades":["c1","c2","c3"],"tecnicas":["t1: desc","t2: desc","t3: desc"],"receitas":[{"n":"nome","tipo":"tipo","tempo":"Xmin"},{"n":"n2","tipo":"t","tempo":"Xmin"},{"n":"n3","tipo":"t","tempo":"Xmin"}],"receita_detalhada":{"n":"nome","tempo":"Xmin","rend":"X porcoes","ing":["i1","i2"],"steps":["p1","p2"],"tip":"dica","emplatamento":"instrucao ou simples"}}';
-  const b64=dataUrl.split(",")[1];
-  const mt=dataUrl.startsWith("data:image/png")?"image/png":"image/jpeg";
-  try{
-    const res=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({image:b64,mediaType:mt,systemPrompt:sys,latitude:userLoc.lat,longitude:userLoc.lon,city:userLoc.city})});
-    const data=await res.json();if(data.error)throw new Error(data.error);
+  var p=PROFILES[selProfile];
+  var sys='Voce e especialista em culinaria adaptado para: '+p.prompt+'. Responda APENAS com JSON valido com os campos: nome, emoji, categoria, confianca (Alta|Media|Baixa), tags (array 3 itens), desc (2-3 frases), grid (array de pares chave-valor), preco (objeto com valor, referencia, dica, melhorEpoca), nutri (array de pares nutriente-percentual), curiosidades (array 3 itens), tecnicas (array 3 itens), receitas (array 3 objetos com n, tipo, tempo), receita_detalhada (objeto com n, tempo, rend, ing, steps, tip, emplatamento).';
+  var b64=dataUrl.split(",")[1];
+  var mt=dataUrl.startsWith("data:image/png")?"image/png":"image/jpeg";
+  fetch("/api/analyze",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({image:b64,mediaType:mt,systemPrompt:sys,latitude:userLoc.lat,longitude:userLoc.lon,city:userLoc.city})
+  })
+  .then(function(res){return res.json();})
+  .then(function(data){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
-    displayResult(data,true);setStatus("✅ "+data.nome+" identificado! Confiança: "+data.confianca);
-  }catch(e){
+    if(data.error) throw new Error(data.error);
+    displayResult(data,true);
+    setStatus("✅ "+data.nome+" identificado! Confiança: "+data.confianca);
+  })
+  .catch(function(e){
     document.getElementById("scan-ov").classList.remove("on");
     document.getElementById("ai-box").classList.add("hidden");
     setStatus("Erro ao analisar. Tente novamente.","err");
-  }
+  });
 }
+
 function displayResult(food,fromAI){
   curFood=food;
   document.getElementById("r-em").textContent=food.emoji||"🍽️";
   document.getElementById("r-nm").textContent=food.nome||food.name||"—";
-  const tc=["tg","tb","ta","tr","tp"];
-  document.getElementById("r-tg").innerHTML=(food.tags||[]).map((t,i)=>'<span class="tag '+tc[i%5]+'">'+t+"</span>").join("");
+  var tc=["tg","tb","ta","tr","tp"];
+  document.getElementById("r-tg").innerHTML=(food.tags||[]).map(function(t,i){
+    return '<span class="tag '+tc[i%5]+'">'+t+"</span>";
+  }).join("");
   document.getElementById("r-cf").textContent=fromAI&&food.confianca?"Confiança da IA: "+food.confianca:"";
-  document.getElementById("r-grid").innerHTML=(food.grid||[]).map(([l,v])=>'<div class="icell"><div class="ilbl">'+l+'</div><div class="ival">'+v+"</div></div>").join("");
+  document.getElementById("r-grid").innerHTML=(food.grid||[]).map(function(pair){
+    return '<div class="icell"><div class="ilbl">'+pair[0]+'</div><div class="ival">'+pair[1]+"</div></div>";
+  }).join("");
   document.getElementById("r-desc").textContent=food.desc||"";
-  const preco=food.preco;
+  var preco=food.preco;
   if(preco){
     document.getElementById("price-value").textContent=preco.valor||"—";
     document.getElementById("price-region").textContent="📍 "+(preco.referencia||"Brasil")+(preco.melhorEpoca?" · Melhor época: "+preco.melhorEpoca:"");
     document.getElementById("price-tip").textContent=preco.dica||"";
     document.getElementById("price-badge").classList.remove("hidden");
   }
-  document.getElementById("r-recs").innerHTML=(food.receitas||[]).map(r=>'<div class="rec-item" onclick="showRD()"><div class="rec-top"><div class="rec-name">'+r.n+'</div><span class="rec-badge">'+r.tipo+"</span></div><div class="rec-meta">⏱ "+r.tempo+"</div></div>").join("");
-  const nutri=food.nutri||[];
-  document.getElementById("r-nutri").innerHTML='<div style="font-size:12px;font-weight:700;color:#aaa;margin-bottom:8px">Perfil nutricional</div>'+nutri.map(([l,v])=>{
-    const pct={"muito baixa":10,"baixa":30,"média":55,"media":55,"alta":80,"muito alta":95}[v]||Math.min(parseInt(v)||50,100);
-    return '<div class="nutri-row"><span style="color:#555;min-width:90px;font-size:12px">'+l+'</span><div class="nbar-wrap"><div class="nbar" style="width:'+pct+'%"></div></div><span class="nval">'+v+"</span></div>";
+  document.getElementById("r-recs").innerHTML=(food.receitas||[]).map(function(r){
+    return '<div class="rec-item" onclick="showRD()"><div class="rec-top"><div class="rec-name">'+r.n+'</div><span class="rec-badge">'+r.tipo+'</span></div><div class="rec-meta">⏱ '+r.tempo+"</div></div>";
   }).join("");
-  document.getElementById("r-curio").innerHTML=(food.curiosidades||food.curio||[]).map((c,i)=>'<div class="curio-row"><div class="curio-n">'+(i+1)+'</div><div class="curio-t">'+c+"</div></div>").join("");
-  const tecs=food.tecnicas||[];
-  document.getElementById("r-tech").innerHTML=tecs.map(t=>{const idx=t.indexOf(":");const n=idx>=0?t.slice(0,idx):t;const d=idx>=0?t.slice(idx+1):"";return'<div class="tech-card"><div class="tech-name">'+n+'</div><div class="tech-desc">'+d+'</div></div>';}).join("");
+  var nutri=food.nutri||[];
+  document.getElementById("r-nutri").innerHTML='<div style="font-size:12px;font-weight:700;color:#aaa;margin-bottom:8px">Perfil nutricional</div>'+nutri.map(function(pair){
+    var v=pair[1];
+    var lookup={"muito baixa":10,"baixa":30,"média":55,"media":55,"alta":80,"muito alta":95};
+    var pct=lookup[v]||Math.min(parseInt(v)||50,100);
+    return '<div class="nutri-row"><span style="color:#555;min-width:90px;font-size:12px">'+pair[0]+'</span><div class="nbar-wrap"><div class="nbar" style="width:'+pct+'%"></div></div><span class="nval">'+v+"</span></div>";
+  }).join("");
+  document.getElementById("r-curio").innerHTML=(food.curiosidades||food.curio||[]).map(function(c,i){
+    return '<div class="curio-row"><div class="curio-n">'+(i+1)+'</div><div class="curio-t">'+c+"</div></div>";
+  }).join("");
+  var tecs=food.tecnicas||[];
+  document.getElementById("r-tech").innerHTML=tecs.map(function(t){
+    var idx=t.indexOf(":");
+    var n=idx>=0?t.slice(0,idx):t;
+    var d=idx>=0?t.slice(idx+1):"";
+    return '<div class="tech-card"><div class="tech-name">'+n+'</div><div class="tech-desc">'+d+"</div></div>";
+  }).join("");
   document.getElementById("tech-tab").style.display=selProfile>=1&&tecs.length?"":"none";
   document.getElementById("result-area").style.display="block";
   document.getElementById("rd-area").style.display="none";
   showSub("info");
 }
+
 function showRD(){
-  const rd=curFood&&(curFood.receita_detalhada||curFood.rd);if(!rd)return;
+  var rd=curFood&&(curFood.receita_detalhada||curFood.rd);
+  if(!rd) return;
   document.getElementById("rd-t").textContent=rd.n;
-  document.getElementById("rd-m").innerHTML="<span>⏱ "+rd.tempo+"</span><span>👥 "+rd.rend+"</span><span>👤 "+PROFILES[selProfile].lvlName+"</span>";
-  document.getElementById("rd-ing").innerHTML=(rd.ing||[]).map(i=>'<div class="ing-row">• '+i+"</div>").join("");
-  document.getElementById("rd-steps").innerHTML=(rd.steps||[]).map((s,i)=>'<div class="step-row"><div class="step-n">'+(i+1)+'</div><div class="step-t">'+s+"</div></div>").join("");
+  document.getElementById("rd-m").innerHTML="<span>⏱ "+rd.tempo+"</span> <span>👥 "+rd.rend+"</span> <span>👤 "+PROFILES[selProfile].lvlName+"</span>";
+  document.getElementById("rd-ing").innerHTML=(rd.ing||[]).map(function(i){return '<div class="ing-row">• '+i+"</div>";}).join("");
+  document.getElementById("rd-steps").innerHTML=(rd.steps||[]).map(function(s,i){
+    return '<div class="step-row"><div class="step-n">'+(i+1)+'</div><div class="step-t">'+s+"</div></div>";
+  }).join("");
   document.getElementById("rd-tip").innerHTML="<strong>💡 Dica "+PROFILES[selProfile].name+":</strong> "+(rd.tip||"");
-  const pe=document.getElementById("rd-plate"),pt=document.getElementById("rd-plate-txt");
-  if(selProfile>=2&&rd.emplatamento&&rd.emplatamento!=="simples"){pe.classList.remove("hidden");pt.textContent=rd.emplatamento;}else pe.classList.add("hidden");
-  document.getElementById("result-area").style.display="none";document.getElementById("rd-area").style.display="block";
+  var pe=document.getElementById("rd-plate");
+  var pt=document.getElementById("rd-plate-txt");
+  if(selProfile>=2&&rd.emplatamento&&rd.emplatamento!=="simples"){
+    pe.classList.remove("hidden");
+    pt.textContent=rd.emplatamento;
+  } else {
+    pe.classList.add("hidden");
+  }
+  document.getElementById("result-area").style.display="none";
+  document.getElementById("rd-area").style.display="block";
 }
-function closeRD(){document.getElementById("rd-area").style.display="none";document.getElementById("result-area").style.display="block";}
+
+function closeRD(){
+  document.getElementById("rd-area").style.display="none";
+  document.getElementById("result-area").style.display="block";
+}
+
 function showSub(t){
-  ["info","receitas","nutri","curio","tecnicas"].forEach((s,i)=>{
-    const el=document.getElementById("sub-"+s);if(el)el.classList.toggle("hidden",s!==t);
-    const tabs=document.querySelectorAll(".sub-tab");if(tabs[i])tabs[i].classList.toggle("active",s===t);
+  var subs=["info","receitas","nutri","curio","tecnicas"];
+  subs.forEach(function(s,i){
+    var el=document.getElementById("sub-"+s);
+    if(el) el.classList.toggle("hidden",s!==t);
+    var tabs=document.querySelectorAll(".sub-tab");
+    if(tabs[i]) tabs[i].classList.toggle("active",s===t);
   });
 }
+
 function renderLib(){
-  const q=(document.getElementById("srch")&&document.getElementById("srch").value||"").toLowerCase();
-  document.getElementById("cat-pills").innerHTML=CATS.map(c=>'<div class="cpill '+(c===selCat?"on":"off")+'" onclick="selCatFn(''+c+'')">'+c+"</div>").join("");
-  const keys=Object.keys(FOODS).filter(k=>{const f=FOODS[k];return(selCat==="Todos"||f.cat===selCat)&&(!q||f.name.toLowerCase().includes(q));});
-  const p=PROFILES[selProfile];const canAcc=usage.unlimited||usage.ingredients<FREE_ING;
-  document.getElementById("food-grid").innerHTML=keys.length?keys.map(k=>{const f=FOODS[k];
-    return'<div class="fc" onclick="libSelect(''+k+'')">'+(!canAcc?'<span class="fc-lock">🔒</span>':"")+'<div class="fc-em">'+f.emoji+'</div><div class="fc-nm">'+f.name+'</div><div class="fc-ct">'+f.cat+'</div><span class="fc-lv" style="background:'+p.color+';color:'+p.tc+'">'+p.lvlName+"</span></div>";
+  var q=(document.getElementById("srch")&&document.getElementById("srch").value||"").toLowerCase();
+  document.getElementById("cat-pills").innerHTML=CATS.map(function(c){
+    return '<div class="cpill '+(c===selCat?"on":"off")+'" onclick="selCatFn(this.dataset.cat)" data-cat="'+c+'">'+c+"</div>";
+  }).join("");
+  var keys=Object.keys(FOODS).filter(function(k){
+    var f=FOODS[k];
+    return (selCat==="Todos"||f.cat===selCat)&&(!q||f.name.toLowerCase().includes(q));
+  });
+  var p=PROFILES[selProfile];
+  var canAcc=usage.unlimited||usage.ingredients<FREE_ING;
+  document.getElementById("food-grid").innerHTML=keys.length?keys.map(function(k){
+    var f=FOODS[k];
+    var lock=!canAcc?'<span class="fc-lock">🔒</span>':"";
+    return '<div class="fc" onclick="libSelect(this.dataset.key)" data-key="'+k+'">'+lock+'<div class="fc-em">'+f.emoji+'</div><div class="fc-nm">'+f.name+'</div><div class="fc-ct">'+f.cat+'</div><span class="fc-lv" style="background:'+p.color+';color:'+p.tc+'">'+p.lvlName+"</span></div>";
   }).join(""):'<div style="grid-column:1/-1;text-align:center;padding:2rem;font-size:14px;color:#aaa">Nenhum alimento encontrado</div>';
 }
-function selCatFn(c){selCat=c;renderLib();}
-function libSelect(k){
-  const f=FOODS[k];if(!f)return;
-  if(!usage.unlimited&&usage.ingredients>=FREE_ING){pendingAct=()=>libSelect(k);openModal("modal-ingredient");return;}
-  usage.ingredients++;saveUsage();updateUsageUI();
+
+function selCatFn(el){
+  selCat=el.dataset?el.dataset.cat:el;
+  renderLib();
+}
+
+function libSelect(el){
+  var k=el.dataset?el.dataset.key:el;
+  var f=FOODS[k];
+  if(!f) return;
+  if(!usage.unlimited&&usage.ingredients>=FREE_ING){
+    pendingAct=function(){libSelect(k);};
+    openModal("modal-ingredient");
+    return;
+  }
+  usage.ingredients++;
+  saveUsage();
+  updateUsageUI();
   switchTab("camera");
   document.getElementById("cam-ph").style.display="none";
   document.getElementById("img-prev").style.display="none";
@@ -571,15 +707,18 @@ function libSelect(k){
   displayResult({nome:f.name,emoji:f.emoji,categoria:f.cat,tags:f.tags,desc:f.desc,grid:f.grid,preco:f.preco,nutri:f.nutri,curiosidades:f.curio,tecnicas:f.tecnicas,receitas:f.receitas,receita_detalhada:f.rd},false);
   setStatus("📚 "+f.name+" — Perfil: "+PROFILES[selProfile].name);
 }
+
 function notifyMe(btn){
-  const email=prompt("Informe seu e-mail para ser avisado:");
+  var email=prompt("Informe seu e-mail para ser avisado:");
   if(email&&email.includes("@")){btn.textContent="✅ Avisaremos você!";btn.disabled=true;}
 }
+
 function submitSugg(){
-  const v=document.getElementById("suggest-input").value.trim();if(!v)return;
+  var v=document.getElementById("suggest-input").value.trim();
+  if(!v) return;
   document.getElementById("suggest-input").value="";
   document.getElementById("sugg-done").classList.remove("hidden");
-  setTimeout(()=>document.getElementById("sugg-done").classList.add("hidden"),3000);
+  setTimeout(function(){document.getElementById("sugg-done").classList.add("hidden");},3000);
 }
 </script>
 </body>
